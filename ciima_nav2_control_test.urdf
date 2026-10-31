@@ -1,0 +1,647 @@
+<?xml version="1.0"?>
+<robot name="ciima_nav2_control_test">
+
+  <!-- ================================================= -->
+  <!-- MAIN CHASSIS                                      -->
+  <!-- ================================================= -->
+
+  <link name="fake_robot_base_link">
+    <inertial>
+      <origin xyz="0 0 0.15"/>
+      <mass value="10.0"/>
+      <inertia ixx="0.5" ixy="0" ixz="0"
+               iyy="0.5" iyz="0" izz="0.8"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0.15" rpy="0 0 -1.5708"/>
+      <geometry>
+        <mesh filename="file:///home/thusitha_madushanaka/nav2_ws/src/ciima_description/meshes/base_link.STL"/>
+      </geometry>
+      <material name="chassis">
+        <color rgba="0.25 0.25 0.25 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0.25"/>
+      <geometry>
+        <box size="0.64 0.42 0.20"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <!-- ================================================= -->
+  <!-- FRONT STEERING MODULE                             -->
+  <!-- ================================================= -->
+
+  <link name="fake_robot_front_steer_link">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.02" ixy="0" ixz="0"
+               iyy="0.02" iyz="0" izz="0.02"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="file:///home/thusitha_madushanaka/nav2_ws/src/ciima_description/meshes/front_steer_link.STL"/>
+      </geometry>
+      <material name="front_steer">
+        <color rgba="0.8 0.2 0.2 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="fake_robot_front_steer_joint" type="continuous">
+    <parent link="fake_robot_base_link"/>
+    <child link="fake_robot_front_steer_link"/>
+    <origin xyz="0.36 0 0.0725" rpy="0 0 3.14159"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+
+  <!-- FRONT WHEEL -->
+
+  <link name="fake_robot_front_wheel_link">
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.002" ixy="0" ixz="0"
+               iyy="0.002" iyz="0" izz="0.002"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0.025 0" rpy="1.5708 -0.57181 0"/>
+      <geometry>
+        <mesh filename="file:///home/thusitha_madushanaka/nav2_ws/src/ciima_description/meshes/front_wheel_link.STL"/>
+      </geometry>
+      <material name="front_wheel">
+        <color rgba="0.1 0.3 0.9 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.0725" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="fake_robot_front_wheel_joint" type="continuous">
+    <parent link="fake_robot_front_steer_link"/>
+    <child link="fake_robot_front_wheel_link"/>
+    <origin xyz="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+  </joint>
+
+
+  <!-- ================================================= -->
+  <!-- REAR STEERING MODULE                              -->
+  <!-- ================================================= -->
+
+  <link name="fake_robot_rear_steer_link">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.02" ixy="0" ixz="0"
+               iyy="0.02" iyz="0" izz="0.02"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="file:///home/thusitha_madushanaka/nav2_ws/src/ciima_description/meshes/rear_steer_link.STL"/>
+      </geometry>
+      <material name="rear_steer">
+        <color rgba="0.2 0.7 0.3 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="fake_robot_rear_steer_joint" type="continuous">
+    <parent link="fake_robot_base_link"/>
+    <child link="fake_robot_rear_steer_link"/>
+    <origin xyz="-0.36 0 0.0725" rpy="0 0 3.14159"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+
+  <!-- REAR WHEEL -->
+
+  <link name="fake_robot_rear_wheel_link">
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.002" ixy="0" ixz="0"
+               iyy="0.002" iyz="0" izz="0.002"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0.025 0" rpy="1.5708 0.56637 0"/>
+      <geometry>
+        <mesh filename="file:///home/thusitha_madushanaka/nav2_ws/src/ciima_description/meshes/rear_wheel_link.STL"/>
+      </geometry>
+      <material name="rear_wheel">
+        <color rgba="0.1 0.3 0.9 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.0725" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="fake_robot_rear_wheel_joint" type="continuous">
+    <parent link="fake_robot_rear_steer_link"/>
+    <child link="fake_robot_rear_wheel_link"/>
+    <origin xyz="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+  </joint>
+
+
+  <!-- ================================================= -->
+  <!-- PASSIVE CASTER 1: FRONT LEFT                      -->
+  <!-- ================================================= -->
+
+  <link name="front_left_caster_mount_link">
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0"
+               iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
+    <!-- Simplified fork visual -->
+    <visual>
+      <origin xyz="0.035 0 -0.055"/>
+      <geometry>
+        <box size="0.025 0.025 0.25"/>
+      </geometry>
+      <material name="caster_fork">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_left_caster_swivel_joint" type="continuous">
+    <parent link="fake_robot_base_link"/>
+    <child link="front_left_caster_mount_link"/>
+    <origin xyz="0.25 0.16 0.15"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="front_left_caster_wheel_link">
+    <inertial>
+      <mass value="0.10"/>
+      <inertia ixx="0.00008" ixy="0" ixz="0"
+               iyy="0.00008" iyz="0" izz="0.00008"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.025"/>
+      </geometry>
+      <material name="caster_wheel">
+        <color rgba="0.08 0.08 0.08 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="front_left_caster_wheel_joint" type="continuous">
+    <parent link="front_left_caster_mount_link"/>
+    <child link="front_left_caster_wheel_link"/>
+    <origin xyz="0.035 0 -0.11"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+
+  <!-- ================================================= -->
+  <!-- PASSIVE CASTER 2: FRONT RIGHT                     -->
+  <!-- ================================================= -->
+
+  <link name="front_right_caster_mount_link">
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0"
+               iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0.035 0 -0.055"/>
+      <geometry>
+        <box size="0.025 0.025 0.25"/>
+      </geometry>
+      <material name="caster_fork">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="front_right_caster_swivel_joint" type="continuous">
+    <parent link="fake_robot_base_link"/>
+    <child link="front_right_caster_mount_link"/>
+    <origin xyz="0.25 -0.16 0.15"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="front_right_caster_wheel_link">
+    <inertial>
+      <mass value="0.10"/>
+      <inertia ixx="0.00008" ixy="0" ixz="0"
+               iyy="0.00008" iyz="0" izz="0.00008"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.025"/>
+      </geometry>
+      <material name="caster_wheel">
+        <color rgba="0.08 0.08 0.08 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="front_right_caster_wheel_joint" type="continuous">
+    <parent link="front_right_caster_mount_link"/>
+    <child link="front_right_caster_wheel_link"/>
+    <origin xyz="0.035 0 -0.11"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+
+  <!-- ================================================= -->
+  <!-- PASSIVE CASTER 3: REAR LEFT                       -->
+  <!-- ================================================= -->
+
+  <link name="rear_left_caster_mount_link">
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0"
+               iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0.035 0 -0.055"/>
+      <geometry>
+        <box size="0.025 0.025 0.25"/>
+      </geometry>
+      <material name="caster_fork">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="rear_left_caster_swivel_joint" type="continuous">
+    <parent link="fake_robot_base_link"/>
+    <child link="rear_left_caster_mount_link"/>
+    <origin xyz="-0.25 0.16 0.15"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="rear_left_caster_wheel_link">
+    <inertial>
+      <mass value="0.10"/>
+      <inertia ixx="0.00008" ixy="0" ixz="0"
+               iyy="0.00008" iyz="0" izz="0.00008"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.025"/>
+      </geometry>
+      <material name="caster_wheel">
+        <color rgba="0.08 0.08 0.08 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rear_left_caster_wheel_joint" type="continuous">
+    <parent link="rear_left_caster_mount_link"/>
+    <child link="rear_left_caster_wheel_link"/>
+    <origin xyz="0.035 0 -0.11"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+
+  <!-- ================================================= -->
+  <!-- PASSIVE CASTER 4: REAR RIGHT                      -->
+  <!-- ================================================= -->
+
+  <link name="rear_right_caster_mount_link">
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0"
+               iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0.035 0 -0.055"/>
+      <geometry>
+        <box size="0.025 0.025 0.25"/>
+      </geometry>
+      <material name="caster_fork">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="rear_right_caster_swivel_joint" type="continuous">
+    <parent link="fake_robot_base_link"/>
+    <child link="rear_right_caster_mount_link"/>
+    <origin xyz="-0.25 -0.16 0.15"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="rear_right_caster_wheel_link">
+    <inertial>
+      <mass value="0.10"/>
+      <inertia ixx="0.00008" ixy="0" ixz="0"
+               iyy="0.00008" iyz="0" izz="0.00008"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.025"/>
+      </geometry>
+      <material name="caster_wheel">
+        <color rgba="0.08 0.08 0.08 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rear_right_caster_wheel_joint" type="continuous">
+    <parent link="rear_right_caster_mount_link"/>
+    <child link="rear_right_caster_wheel_link"/>
+    <origin xyz="0.035 0 -0.11"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+
+  <!-- ================================================= -->
+  <!-- LIDAR                                              -->
+  <!-- ================================================= -->
+
+  <link name="fake_robot_lidar_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.04" length="0.04"/>
+      </geometry>
+      <material name="lidar_black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="0.04" length="0.04"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0"
+               iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="fake_robot_lidar_joint" type="fixed">
+    <parent link="fake_robot_base_link"/>
+    <child link="fake_robot_lidar_link"/>
+    <origin xyz="2.2 0 1.2"/>
+  </joint>
+
+
+  <!-- ================================================= -->
+  <!-- GAZEBO LIDAR SENSOR                                -->
+  <!-- ================================================= -->
+
+  <gazebo reference="fake_robot_lidar_link">
+    <sensor name="lidar_sensor" type="ray">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+
+        <range>
+          <min>0.12</min>
+          <max>8.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+
+      <plugin name="gazebo_ros_lidar"
+              filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>~/out:=/scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>fake_robot_lidar_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+  <!-- ================================================= -->
+  <!-- ROS 2 CONTROL INTERFACES                           -->
+  <!-- ================================================= -->
+
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+
+    <joint name="fake_robot_front_steer_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="fake_robot_rear_steer_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="fake_robot_front_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="fake_robot_rear_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+
+  <!-- ================================================= -->
+  <!-- WHEEL CONTACT PARAMETERS                           -->
+  <!-- ================================================= -->
+
+  <gazebo reference="fake_robot_front_wheel_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000</kp>
+    <kd>10</kd>
+  </gazebo>
+
+  <gazebo reference="fake_robot_rear_wheel_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000</kp>
+    <kd>10</kd>
+  </gazebo>
+
+  <!-- Passive caster contact parameters -->
+
+  <gazebo reference="front_left_caster_wheel_link">
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+    <kp>1000000</kp>
+    <kd>10</kd>
+  </gazebo>
+
+  <gazebo reference="front_right_caster_wheel_link">
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+    <kp>1000000</kp>
+    <kd>10</kd>
+  </gazebo>
+
+  <gazebo reference="rear_left_caster_wheel_link">
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+    <kp>1000000</kp>
+    <kd>10</kd>
+  </gazebo>
+
+  <gazebo reference="rear_right_caster_wheel_link">
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+    <kp>1000000</kp>
+    <kd>10</kd>
+  </gazebo>
+
+  <!-- ================================================= -->
+  <!-- ROBOT COLOURS                                     -->
+  <!-- ================================================= -->
+
+  <!-- Main chassis: BLACK -->
+  <gazebo reference="fake_robot_base_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <!-- Active steering links: RED -->
+  <gazebo reference="fake_robot_front_steer_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="fake_robot_rear_steer_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <!-- Active wheels: RED -->
+  <gazebo reference="fake_robot_front_wheel_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="fake_robot_rear_wheel_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <!-- Passive caster forks: GREY -->
+  <gazebo reference="front_left_caster_mount_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="front_right_caster_mount_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="rear_left_caster_mount_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="rear_right_caster_mount_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <!-- Passive caster wheels: GREY -->
+  <gazebo reference="front_left_caster_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="front_right_caster_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="rear_left_caster_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="rear_right_caster_wheel_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+
+
+
+  <!-- ================================================= -->
+  <!-- GAZEBO ROS 2 CONTROL PLUGIN                        -->
+  <!-- ================================================= -->
+
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so"
+            name="gazebo_ros2_control">
+      <parameters>/home/thusitha_madushanaka/nav2_ws/src/ciima_bringup/configs/controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+</robot>
+
