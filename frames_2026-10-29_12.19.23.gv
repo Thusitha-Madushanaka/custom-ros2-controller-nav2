@@ -1,0 +1,10 @@
+digraph G {
+"fake_robot_base_link" -> "fake_robot_front_steer_link"[label=" Broadcaster: default_authority\nAverage rate: 10.357\nBuffer length: 2.8\nMost recent transform: 104.2\nOldest transform: 101.4\n"];
+"fake_robot_front_steer_link" -> "fake_robot_front_wheel_link"[label=" Broadcaster: default_authority\nAverage rate: 10.357\nBuffer length: 2.8\nMost recent transform: 104.2\nOldest transform: 101.4\n"];
+"fake_robot_base_link" -> "fake_robot_rear_steer_link"[label=" Broadcaster: default_authority\nAverage rate: 10.357\nBuffer length: 2.8\nMost recent transform: 104.2\nOldest transform: 101.4\n"];
+"fake_robot_rear_steer_link" -> "fake_robot_rear_wheel_link"[label=" Broadcaster: default_authority\nAverage rate: 10.357\nBuffer length: 2.8\nMost recent transform: 104.2\nOldest transform: 101.4\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1793272763.071427"[ shape=plaintext ] ;
+}->"fake_robot_base_link";
+}

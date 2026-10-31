@@ -441,7 +441,7 @@
   <joint name="fake_robot_lidar_joint" type="fixed">
     <parent link="fake_robot_base_link"/>
     <child link="fake_robot_lidar_link"/>
-    <origin xyz="2.2 0 1.2"/>
+    <origin xyz="0.0 0.0 0.42" rpy="0 0 0"/>
   </joint>
 
 
