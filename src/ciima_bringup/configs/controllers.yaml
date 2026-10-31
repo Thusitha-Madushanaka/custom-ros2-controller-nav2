@@ -8,10 +8,8 @@ controller_manager:
     custom_controller:
       type: custom_controller/CustomController
 
-
 custom_controller:
   ros__parameters:
-
     wheel_names:
       - fake_robot_front_steer_joint
       - fake_robot_rear_steer_joint
@@ -22,16 +20,13 @@ custom_controller:
     wheel_radius: 0.0725
 
     cmd_vel_timeout: 0.5
-
     max_steering_rate: 0.5
     steering_alignment_tolerance: 0.05
 
     open_loop: true
     position_feedback: false
-
     enable_odom_tf: true
 
     odom_frame_id: odom
     base_frame_id: fake_robot_base_link
-
     tf_frame_prefix_enable: false
