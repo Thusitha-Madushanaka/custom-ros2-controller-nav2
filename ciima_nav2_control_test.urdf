@@ -5,7 +5,7 @@
   <!-- MAIN CHASSIS                                      -->
   <!-- ================================================= -->
 
-  <link name="fake_robot_base_link">
+  <link name="ciima_base_link">
     <inertial>
       <origin xyz="0 0 0.15"/>
       <mass value="10.0"/>
@@ -36,7 +36,7 @@
   <!-- FRONT STEERING MODULE                             -->
   <!-- ================================================= -->
 
-  <link name="fake_robot_front_steer_link">
+  <link name="ciima_front_steer_link">
     <inertial>
       <mass value="1.0"/>
       <inertia ixx="0.02" ixy="0" ixz="0"
@@ -54,9 +54,9 @@
     </visual>
   </link>
 
-  <joint name="fake_robot_front_steer_joint" type="continuous">
-    <parent link="fake_robot_base_link"/>
-    <child link="fake_robot_front_steer_link"/>
+  <joint name="ciima_front_steer_joint" type="continuous">
+    <parent link="ciima_base_link"/>
+    <child link="ciima_front_steer_link"/>
     <origin xyz="0.36 0 0.0725" rpy="0 0 3.14159"/>
     <axis xyz="0 0 1"/>
   </joint>
@@ -64,7 +64,7 @@
 
   <!-- FRONT WHEEL -->
 
-  <link name="fake_robot_front_wheel_link">
+  <link name="ciima_front_wheel_link">
     <inertial>
       <mass value="0.5"/>
       <inertia ixx="0.002" ixy="0" ixz="0"
@@ -89,9 +89,9 @@
     </collision>
   </link>
 
-  <joint name="fake_robot_front_wheel_joint" type="continuous">
-    <parent link="fake_robot_front_steer_link"/>
-    <child link="fake_robot_front_wheel_link"/>
+  <joint name="ciima_front_wheel_joint" type="continuous">
+    <parent link="ciima_front_steer_link"/>
+    <child link="ciima_front_wheel_link"/>
     <origin xyz="0 0 0"/>
     <axis xyz="0 -1 0"/>
   </joint>
@@ -101,7 +101,7 @@
   <!-- REAR STEERING MODULE                              -->
   <!-- ================================================= -->
 
-  <link name="fake_robot_rear_steer_link">
+  <link name="ciima_rear_steer_link">
     <inertial>
       <mass value="1.0"/>
       <inertia ixx="0.02" ixy="0" ixz="0"
@@ -119,9 +119,9 @@
     </visual>
   </link>
 
-  <joint name="fake_robot_rear_steer_joint" type="continuous">
-    <parent link="fake_robot_base_link"/>
-    <child link="fake_robot_rear_steer_link"/>
+  <joint name="ciima_rear_steer_joint" type="continuous">
+    <parent link="ciima_base_link"/>
+    <child link="ciima_rear_steer_link"/>
     <origin xyz="-0.36 0 0.0725" rpy="0 0 3.14159"/>
     <axis xyz="0 0 1"/>
   </joint>
@@ -129,7 +129,7 @@
 
   <!-- REAR WHEEL -->
 
-  <link name="fake_robot_rear_wheel_link">
+  <link name="ciima_rear_wheel_link">
     <inertial>
       <mass value="0.5"/>
       <inertia ixx="0.002" ixy="0" ixz="0"
@@ -154,9 +154,9 @@
     </collision>
   </link>
 
-  <joint name="fake_robot_rear_wheel_joint" type="continuous">
-    <parent link="fake_robot_rear_steer_link"/>
-    <child link="fake_robot_rear_wheel_link"/>
+  <joint name="ciima_rear_wheel_joint" type="continuous">
+    <parent link="ciima_rear_steer_link"/>
+    <child link="ciima_rear_wheel_link"/>
     <origin xyz="0 0 0"/>
     <axis xyz="0 -1 0"/>
   </joint>
@@ -186,7 +186,7 @@
   </link>
 
   <joint name="front_left_caster_swivel_joint" type="continuous">
-    <parent link="fake_robot_base_link"/>
+    <parent link="ciima_base_link"/>
     <child link="front_left_caster_mount_link"/>
     <origin xyz="0.25 0.16 0.15"/>
     <axis xyz="0 0 1"/>
@@ -248,7 +248,7 @@
   </link>
 
   <joint name="front_right_caster_swivel_joint" type="continuous">
-    <parent link="fake_robot_base_link"/>
+    <parent link="ciima_base_link"/>
     <child link="front_right_caster_mount_link"/>
     <origin xyz="0.25 -0.16 0.15"/>
     <axis xyz="0 0 1"/>
@@ -310,7 +310,7 @@
   </link>
 
   <joint name="rear_left_caster_swivel_joint" type="continuous">
-    <parent link="fake_robot_base_link"/>
+    <parent link="ciima_base_link"/>
     <child link="rear_left_caster_mount_link"/>
     <origin xyz="-0.25 0.16 0.15"/>
     <axis xyz="0 0 1"/>
@@ -372,7 +372,7 @@
   </link>
 
   <joint name="rear_right_caster_swivel_joint" type="continuous">
-    <parent link="fake_robot_base_link"/>
+    <parent link="ciima_base_link"/>
     <child link="rear_right_caster_mount_link"/>
     <origin xyz="-0.25 -0.16 0.15"/>
     <axis xyz="0 0 1"/>
@@ -415,7 +415,7 @@
   <!-- LIDAR                                              -->
   <!-- ================================================= -->
 
-  <link name="fake_robot_lidar_link">
+  <link name="ciima_lidar_link">
     <visual>
       <geometry>
         <cylinder radius="0.04" length="0.04"/>
@@ -438,9 +438,9 @@
     </inertial>
   </link>
 
-  <joint name="fake_robot_lidar_joint" type="fixed">
-    <parent link="fake_robot_base_link"/>
-    <child link="fake_robot_lidar_link"/>
+  <joint name="ciima_lidar_joint" type="fixed">
+    <parent link="ciima_base_link"/>
+    <child link="ciima_lidar_link"/>
     <origin xyz="0.0 0.0 0.42" rpy="0 0 0"/>
   </joint>
 
@@ -449,7 +449,7 @@
   <!-- GAZEBO LIDAR SENSOR                                -->
   <!-- ================================================= -->
 
-  <gazebo reference="fake_robot_lidar_link">
+  <gazebo reference="ciima_lidar_link">
     <sensor name="lidar_sensor" type="ray">
       <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
@@ -479,7 +479,7 @@
           <remapping>~/out:=/scan</remapping>
         </ros>
         <output_type>sensor_msgs/LaserScan</output_type>
-        <frame_name>fake_robot_lidar_link</frame_name>
+        <frame_name>ciima_lidar_link</frame_name>
       </plugin>
     </sensor>
   </gazebo>
@@ -494,25 +494,25 @@
       <plugin>gazebo_ros2_control/GazeboSystem</plugin>
     </hardware>
 
-    <joint name="fake_robot_front_steer_joint">
+    <joint name="ciima_front_steer_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
 
-    <joint name="fake_robot_rear_steer_joint">
+    <joint name="ciima_rear_steer_joint">
       <command_interface name="position"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
 
-    <joint name="fake_robot_front_wheel_joint">
+    <joint name="ciima_front_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
 
-    <joint name="fake_robot_rear_wheel_joint">
+    <joint name="ciima_rear_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
@@ -524,14 +524,14 @@
   <!-- WHEEL CONTACT PARAMETERS                           -->
   <!-- ================================================= -->
 
-  <gazebo reference="fake_robot_front_wheel_link">
+  <gazebo reference="ciima_front_wheel_link">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
     <kp>1000000</kp>
     <kd>10</kd>
   </gazebo>
 
-  <gazebo reference="fake_robot_rear_wheel_link">
+  <gazebo reference="ciima_rear_wheel_link">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
     <kp>1000000</kp>
@@ -573,25 +573,25 @@
   <!-- ================================================= -->
 
   <!-- Main chassis: BLACK -->
-  <gazebo reference="fake_robot_base_link">
+  <gazebo reference="ciima_base_link">
     <material>Gazebo/Black</material>
   </gazebo>
 
   <!-- Active steering links: RED -->
-  <gazebo reference="fake_robot_front_steer_link">
+  <gazebo reference="ciima_front_steer_link">
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <gazebo reference="fake_robot_rear_steer_link">
+  <gazebo reference="ciima_rear_steer_link">
     <material>Gazebo/Red</material>
   </gazebo>
 
   <!-- Active wheels: RED -->
-  <gazebo reference="fake_robot_front_wheel_link">
+  <gazebo reference="ciima_front_wheel_link">
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <gazebo reference="fake_robot_rear_wheel_link">
+  <gazebo reference="ciima_rear_wheel_link">
     <material>Gazebo/Red</material>
   </gazebo>
 
