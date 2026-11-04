@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="ciima_obstacle_test">
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Static obstacle -->
+    <model name="test_obstacle">
+      <static>true</static>
+      <pose>4.0 0.0 0.4 0 0 0</pose>
+      <link name="obstacle_link">
+        <collision name="collision">
+          <geometry>
+            <box><size>1.0 0.2 0.8</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>1.0 0.2 0.8</size></box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.2 0.1 1</ambient>
+            <diffuse>0.8 0.2 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Arena walls -->
+    <model name="north_wall">
+      <static>true</static>
+      <pose>0 4 0.5 0 0 0</pose>
+      <link name="wall">
+        <collision name="collision">
+          <geometry><box><size>12 0.2 1</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>12 0.2 1</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="south_wall">
+      <static>true</static>
+      <pose>0 -4 0.5 0 0 0</pose>
+      <link name="wall">
+        <collision name="collision">
+          <geometry><box><size>12 0.2 1</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>12 0.2 1</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="east_wall">
+      <static>true</static>
+      <pose>6 0 0.5 0 0 0</pose>
+      <link name="wall">
+        <collision name="collision">
+          <geometry><box><size>0.2 8 1</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.2 8 1</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="west_wall">
+      <static>true</static>
+      <pose>-6 0 0.5 0 0 0</pose>
+      <link name="wall">
+        <collision name="collision">
+          <geometry><box><size>0.2 8 1</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.2 8 1</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

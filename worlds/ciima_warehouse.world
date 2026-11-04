@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="ciima_warehouse">
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Warehouse boundary: 30 m x 24 m -->
+
+    <model name="north_wall">
+      <static>true</static>
+      <pose>0 12 1 0 0 0</pose>
+      <link name="wall">
+        <collision name="collision">
+          <geometry><box><size>30 0.2 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>30 0.2 2</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="south_wall">
+      <static>true</static>
+      <pose>0 -12 1 0 0 0</pose>
+      <link name="wall">
+        <collision name="collision">
+          <geometry><box><size>30 0.2 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>30 0.2 2</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="east_wall">
+      <static>true</static>
+      <pose>15 0 1 0 0 0</pose>
+      <link name="wall">
+        <collision name="collision">
+          <geometry><box><size>0.2 24 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.2 24 2</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="west_wall">
+      <static>true</static>
+      <pose>-15 0 1 0 0 0</pose>
+      <link name="wall">
+        <collision name="collision">
+          <geometry><box><size>0.2 24 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.2 24 2</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Storage rack section A -->
+    <model name="rack_1">
+      <static>true</static>
+      <pose>-7 7 1 0 0 0</pose>
+      <link name="rack">
+        <collision name="collision">
+          <geometry><box><size>6 0.8 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.8 2</size></box></geometry>
+          <material><ambient>0.1 0.2 0.8 1</ambient><diffuse>0.1 0.2 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rack_2">
+      <static>true</static>
+      <pose>5 7 1 0 0 0</pose>
+      <link name="rack">
+        <collision name="collision">
+          <geometry><box><size>6 0.8 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.8 2</size></box></geometry>
+          <material><ambient>0.1 0.2 0.8 1</ambient><diffuse>0.1 0.2 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Storage rack section B -->
+    <model name="rack_3">
+      <static>true</static>
+      <pose>-7 -7 1 0 0 0</pose>
+      <link name="rack">
+        <collision name="collision">
+          <geometry><box><size>6 0.8 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.8 2</size></box></geometry>
+          <material><ambient>0.1 0.2 0.8 1</ambient><diffuse>0.1 0.2 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rack_4">
+      <static>true</static>
+      <pose>5 -7 1 0 0 0</pose>
+      <link name="rack">
+        <collision name="collision">
+          <geometry><box><size>6 0.8 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.8 2</size></box></geometry>
+          <material><ambient>0.1 0.2 0.8 1</ambient><diffuse>0.1 0.2 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Pallets: distributed away from the starting area -->
+
+    <model name="pallet_1">
+      <static>true</static>
+      <pose>-10 1.5 0.35 0 0 0</pose>
+      <link name="pallet">
+        <collision name="collision">
+          <geometry><box><size>0.9 0.9 0.7</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.9 0.9 0.7</size></box></geometry>
+          <material><ambient>0.6 0.3 0.1 1</ambient><diffuse>0.6 0.3 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="pallet_2">
+      <static>true</static>
+      <pose>10 -1.5 0.35 0 0 0</pose>
+      <link name="pallet">
+        <collision name="collision">
+          <geometry><box><size>0.9 0.9 0.7</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.9 0.9 0.7</size></box></geometry>
+          <material><ambient>0.6 0.3 0.1 1</ambient><diffuse>0.6 0.3 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="pallet_3">
+      <static>true</static>
+      <pose>0 9 0.35 0 0 0</pose>
+      <link name="pallet">
+        <collision name="collision">
+          <geometry><box><size>0.9 0.9 0.7</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.9 0.9 0.7</size></box></geometry>
+          <material><ambient>0.6 0.3 0.1 1</ambient><diffuse>0.6 0.3 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

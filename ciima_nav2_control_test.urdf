@@ -24,9 +24,9 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 0.25"/>
+      <origin xyz="0 0 0.635"/>
       <geometry>
-        <box size="0.64 0.42 0.20"/>
+        <box size="4.50 1.70 0.97"/>
       </geometry>
     </collision>
   </link>
@@ -441,7 +441,7 @@
   <joint name="ciima_lidar_joint" type="fixed">
     <parent link="ciima_base_link"/>
     <child link="ciima_lidar_link"/>
-    <origin xyz="0.0 0.0 0.42" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0 1.25" rpy="0 0 0"/>
   </joint>
 
 
